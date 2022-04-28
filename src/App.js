@@ -1,17 +1,20 @@
 import { useEffect } from "react";
+import API_IPGEOLOCATION from "./API";
 import arrow from "./assets/icon-arrow.svg";
 import IpInfo from "./IpInfo";
 import Map from "./Map";
 
 function App() {
-  // useEffect(() => {
-  //   fetch(
-  //     "https://geo.ipify.org/api/v2/country,city?apiKey=at_Mm85GOLR6Ac7vsn1i4V8WgLta9Zf1"
-  //   )
-  //     .then(response => response.json())
-  //     .then(ipData => console.log(ipData))
-  //     .catch(err => err.message);
-  // }, []);
+  useEffect(() => {
+    fetch(
+      `https://geo.ipify.org/api/v2/country,city?apiKey=${API_IPGEOLOCATION}`
+    )
+      .then(response => response.json())
+      .then(ipData => console.log(ipData))
+      .catch(err => err.message);
+  }, []);
+
+  console.log(API_IPGEOLOCATION);
 
   return (
     <div className="App min-h-[828px]">

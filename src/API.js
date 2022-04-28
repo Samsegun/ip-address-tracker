@@ -1,0 +1,3 @@
+const API_IPGEOLOCATION = process.env.REACT_APP_API_IPGEOLOCATION;
+
+export default API_IPGEOLOCATION;
