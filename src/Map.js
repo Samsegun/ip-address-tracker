@@ -4,12 +4,12 @@ const Map = () => {
   // const [] = useMap()
 
   return (
-    <MapContainer center={[51.505, -0.09]} zoom={12} scrollWheelZoom={false}>
+    <MapContainer center={[9.06405, 7.45796]} zoom={12} scrollWheelZoom={false}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={[51.505, -0.09]}>
+      <Marker position={[9.06405, 7.45796]}>
         <Popup>
           A pretty CSS3 popup. <br /> Easily customizable.
         </Popup>

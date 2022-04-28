@@ -1,26 +1,37 @@
+import { useEffect } from "react";
 import arrow from "./assets/icon-arrow.svg";
 import IpInfo from "./IpInfo";
 import Map from "./Map";
 
 function App() {
+  // useEffect(() => {
+  //   fetch(
+  //     "https://geo.ipify.org/api/v2/country,city?apiKey=at_Mm85GOLR6Ac7vsn1i4V8WgLta9Zf1"
+  //   )
+  //     .then(response => response.json())
+  //     .then(ipData => console.log(ipData))
+  //     .catch(err => err.message);
+  // }, []);
+
   return (
     <div className="App min-h-[828px]">
       {/* wrapper */}
       <div className="min-h-[100vh] font-rubik ">
         <header className="relative min-h-[40vh] bg-background bg-no-repeat bg-center bg-cover">
           <div className="text-center h-full max-w-[1440px] mx-auto">
-            <h1 className="text-white text-3xl py-8">IP Address Tracker</h1>
+            <h1 className="py-8 text-3xl text-white">IP Address Tracker</h1>
 
-            <form className="relative">
+            <form className="relative max-w-[828px] mx-auto">
               <input
                 type="text"
                 id=""
-                className="w-[90%] p-4 min-h-[40px] rounded-2xl focus-visible:outline-none"
+                className="w-[80%] p-4 min-h-[40px] rounded-2xl 
+                focus-visible:outline-none md:max-w-3xl md:text-lg md:min-h-[]"
               />
               <img
                 src={arrow}
                 alt="arrow icon"
-                className="bg-black absolute top-0 right-[5%] h-full
+                className="bg-black absolute top-0 right-[10%] h-full
                p-4 cursor-pointer hover:opacity-70 rounded-r-2xl"
               />
             </form>
