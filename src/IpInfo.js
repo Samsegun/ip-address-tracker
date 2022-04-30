@@ -8,7 +8,7 @@ const IpInfo = props => {
      max-w-[1440px] mx-auto z-10 md:w-[80%]"
     >
       {/* same logic for checking errors in parent element(App.js) */}
-      {props.ipInfo.hasOwnProperty("location") ? (
+      {"location" in props.ipInfo && (
         <ul className="flex flex-col items-center p-4 md:justify-around md:flex-row">
           <li className="my-2 basis-1/4 lg:border-r md:px-4 md:text-left">
             <span className="text-sm font-medium text-gray-400">
@@ -34,13 +34,21 @@ const IpInfo = props => {
             <h2 className="text-2xl font-medium">{props.ipInfo.isp}</h2>
           </li>
         </ul>
-      ) : (
-        <div className="px-4 py-6 text-2xl font-bold text-center font-rubik bg-[#f1f2f3]">
-          {props.fetchError ? (
-            props.fetchError
-          ) : (
-            <img src={loadingGif} alt="loading" className="w-12 mx-auto" />
-          )}
+      )}
+
+      {"code" in props.ipInfo && (
+        <div className="px-4 py-6 rounded-2xl text-2xl font-bold text-center font-rubik bg-[#f1f2f3]">
+          {props.ipInfo.messages}
+        </div>
+      )}
+
+      {"loading" in props.ipInfo && (
+        <img src={loadingGif} alt="loading" className="w-12 mx-auto" />
+      )}
+
+      {props.fetchError && (
+        <div className="py-6 text-3xl font-bold text-center font-rubik">
+          {props.fetchError} Ip details
         </div>
       )}
     </div>

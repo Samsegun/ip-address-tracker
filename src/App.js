@@ -4,16 +4,13 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import arrow from "./assets/icon-arrow.svg";
 import loadingGif from "./assets/Rolling-1.1s-200px.gif";
 import IpInfo from "./IpInfo";
-// import Map from "./Map";
-// import {useMap} from "react-leaflet"
 
 function App() {
   const [ipify, setIpify] = useState(
     `https://geo.ipify.org/api/v2/country,city?apiKey=${API_IPGEOLOCATION}`
   );
-  const [ipInfo, setIpinfo] = useState({});
+  const [ipInfo, setIpinfo] = useState({ loading: "Loading..." });
   const [fetchError, setFetchError] = useState("");
-  // const [fetchError, setFetchError] = useState("Loading...");
 
   // get user input from with the help of useRef
   const ipDomain = useRef(null);
@@ -25,17 +22,12 @@ function App() {
       })
       .then(ipData => {
         console.log(ipData);
-        // if data from api contains "code", this means an error
-        if (ipData.code) {
-          console.log(ipData.messages);
-          setFetchError(`${ipData.messages} ${ipData.code}`);
-        } else {
-          setIpinfo(ipData);
-        }
+        setIpinfo(ipData);
       })
       .catch(err => {
         // this is for handling network error NOT server or api error
         console.log(err.message);
+        setIpinfo({});
         setFetchError(err.message);
       });
   }, [ipify]);
@@ -105,7 +97,7 @@ function App() {
         {/* map */}
         {/* checking for valid requests before rendering data */}
         {/* if ipInfo contains "location",then request is valid else request is invalid */}
-        {ipInfo.hasOwnProperty("location") ? (
+        {ipInfo.hasOwnProperty("location") && (
           <MapContainer
             center={[ipInfo.location.lat, ipInfo.location.lng]}
             zoom={12}
@@ -122,23 +114,23 @@ function App() {
               </Popup>
             </Marker>
           </MapContainer>
-        ) : (
+        )}
+
+        {ipInfo.hasOwnProperty("code") && (
           <div className="px-4 py-10 text-2xl font-bold text-center font-rubik">
-            {fetchError ? (
-              fetchError
-            ) : (
-              <img src={loadingGif} alt="loading" className="mx-auto my-8" />
-            )}
+            {ipInfo.messages}
           </div>
         )}
-        {/* {fetchError && (
-        <div
-          className="absolute top-[20%] left-[50%] -translate-x-1/2 z-30 shadow-xl bg-white rounded-2xl
-        flex items-center justify-center w-4/5 h-[30vh] text-3xl font-bold font-rubik"
-        >
-          {fetchError}
-        </div>
-        )} */}
+
+        {ipInfo.hasOwnProperty("loading") && (
+          <img src={loadingGif} alt="loading" className="mx-auto my-8" />
+        )}
+
+        {fetchError && (
+          <div className="px-4 py-16 text-3xl font-bold text-center font-rubik">
+            {fetchError} Map
+          </div>
+        )}
       </div>
     </div>
   );
