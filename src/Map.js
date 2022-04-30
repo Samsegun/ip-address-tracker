@@ -1,6 +1,6 @@
 // import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 
-// const MyMap = props => {
+// export const MyMap = props => {
 //   const map = useMap();
 //   // map.setView(props.center, props.zoom);
 //   map.setView([props.ipInfo.location.lat, props.ipInfo.location.lng], 12);

@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    background: #f1f2f3;
+}
+
 .leaflet-container {
     z-index: 1;
     width: 100%;
@@ -12,6 +16,7 @@
 
 .leaflet-control-container {
     display: none;
+    
 }
 
 .leaflet-popup-content {

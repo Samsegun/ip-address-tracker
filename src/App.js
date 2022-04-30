@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import API_IPGEOLOCATION from "./API";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
-
 import arrow from "./assets/icon-arrow.svg";
+import loadingGif from "./assets/Rolling-1.1s-200px.gif";
 import IpInfo from "./IpInfo";
 // import Map from "./Map";
 // import {useMap} from "react-leaflet"
@@ -11,19 +11,33 @@ function App() {
   const [ipify, setIpify] = useState(
     `https://geo.ipify.org/api/v2/country,city?apiKey=${API_IPGEOLOCATION}`
   );
-  const [ipInfo, setIpinfo] = useState(null);
+  const [ipInfo, setIpinfo] = useState({});
+  const [fetchError, setFetchError] = useState("");
+  // const [fetchError, setFetchError] = useState("Loading...");
 
   // get user input from with the help of useRef
   const ipDomain = useRef(null);
 
   useEffect(() => {
     fetch(ipify)
-      .then(response => response.json())
+      .then(response => {
+        return response.json();
+      })
       .then(ipData => {
         console.log(ipData);
-        setIpinfo(ipData);
+        // if data from api contains "code", this means an error
+        if (ipData.code) {
+          console.log(ipData.messages);
+          setFetchError(`${ipData.messages} ${ipData.code}`);
+        } else {
+          setIpinfo(ipData);
+        }
       })
-      .catch(err => err.message);
+      .catch(err => {
+        // this is for handling network error NOT server or api error
+        console.log(err.message);
+        setFetchError(err.message);
+      });
   }, [ipify]);
 
   const MyMap = () => {
@@ -57,7 +71,7 @@ function App() {
   return (
     <div className="App min-h-[828px]">
       {/* wrapper */}
-      <div className="min-h-[100vh] font-rubik ">
+      <div className="relative min-h-[100vh] font-rubik ">
         <header className="relative min-h-[40vh] bg-background bg-no-repeat bg-center bg-cover">
           <div className="text-center h-full max-w-[1440px] mx-auto">
             <h1 className="py-8 text-3xl text-white">IP Address Tracker</h1>
@@ -69,15 +83,15 @@ function App() {
               <input
                 type="text"
                 id=""
-                className="w-[80%] font-rubik p-4 min-h-[40px] rounded-2xl 
-                focus-visible:outline-none md:max-w-3xl md:text-lg md:min-h-[]"
+                className="w-[90%] font-rubik p-4 min-h-[40px] rounded-2xl text-base
+                focus-visible:outline-none md:max-w-3xl md:text-lg md:w-[80%] md:min-h-[]"
                 placeholder="Searh for any IP address or Domain"
                 ref={ipDomain}
               />
               <img
                 src={arrow}
                 alt="arrow icon"
-                className="bg-black absolute top-0 right-[10%] h-full
+                className="bg-black absolute top-0 right-[5%] h-full
                p-4 cursor-pointer hover:opacity-70 rounded-r-2xl"
                 onClick={submitHandler}
               />
@@ -85,19 +99,19 @@ function App() {
           </div>
 
           {/* ip info */}
-          <IpInfo ipInfo={ipInfo} />
+          <IpInfo ipInfo={ipInfo} fetchError={fetchError} />
         </header>
 
         {/* map */}
-        {ipInfo ? (
+        {/* checking for valid requests before rendering data */}
+        {/* if ipInfo contains "location",then request is valid else request is invalid */}
+        {ipInfo.hasOwnProperty("location") ? (
           <MapContainer
             center={[ipInfo.location.lat, ipInfo.location.lng]}
             zoom={12}
             scrollWheelZoom={false}
           >
-            {/* {console.log(props.ipInfo)} */}
             <MyMap />
-
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -105,15 +119,26 @@ function App() {
             <Marker position={[ipInfo.location.lat, ipInfo.location.lng]}>
               <Popup>
                 Ip Address <br /> Current location.
-                {/* A pretty CSS3 popup. <br /> Easily customizable. */}
               </Popup>
             </Marker>
           </MapContainer>
         ) : (
-          <div className="text-2xl font-bold text-center font-rubik">
-            Loading...
+          <div className="px-4 py-10 text-2xl font-bold text-center font-rubik">
+            {fetchError ? (
+              fetchError
+            ) : (
+              <img src={loadingGif} alt="loading" className="mx-auto my-8" />
+            )}
           </div>
         )}
+        {/* {fetchError && (
+        <div
+          className="absolute top-[20%] left-[50%] -translate-x-1/2 z-30 shadow-xl bg-white rounded-2xl
+        flex items-center justify-center w-4/5 h-[30vh] text-3xl font-bold font-rubik"
+        >
+          {fetchError}
+        </div>
+        )} */}
       </div>
     </div>
   );
