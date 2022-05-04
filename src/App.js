@@ -11,6 +11,8 @@ function App() {
   );
   const [ipInfo, setIpinfo] = useState({ loading: "Loading..." });
   const [fetchError, setFetchError] = useState("");
+  // for ip info styling
+  const [top, setTop] = useState(false);
 
   // get user input from with the help of useRef
   const ipDomain = useRef(null);
@@ -43,6 +45,7 @@ function App() {
     return null;
   };
 
+  // form submit handler
   const submitHandler = e => {
     e.preventDefault();
 
@@ -59,8 +62,16 @@ function App() {
     // update state value with user input value
     setIpify(userInput);
 
+    // reset ip info top
+    setTop(false);
+
     // for clearing input(optional)
     // ipDomain.current.value = "";
+  };
+
+  // focus handler
+  const focusHandler = () => {
+    setTop(true);
   };
 
   return (
@@ -82,11 +93,12 @@ function App() {
                 id=""
                 className={
                   ipInfo.code
-                    ? "w-[90%] font-rubik bg-red-300 p-4 min-h-[40px] rounded-2xl text-white focus-visible:outline-none md:max-w-3xl md:text-lg md:w-[80%] md:min-h-[]"
+                    ? "w-[90%] font-rubik bg-red-300 p-4 min-h-[40px] rounded-2xl text-white focus-visible:outline-none md:max-w-3xl md:text-lg md:w-[80%]"
                     : "w-[90%] font-rubik p-4 min-h-[40px] rounded-2xl text-base focus-visible:outline-none md:max-w-3xl md:text-lg md:w-[80%] md:min-h-[]"
                 }
                 placeholder="Searh for any IP address or Domain"
                 ref={ipDomain}
+                onFocus={focusHandler}
               />
               <img
                 src={arrow}
@@ -99,7 +111,7 @@ function App() {
           </div>
 
           {/* IP INFORMATION */}
-          <IpInfo ipInfo={ipInfo} fetchError={fetchError} />
+          <IpInfo ipInfo={ipInfo} fetchError={fetchError} top={top} />
         </header>
 
         {/* MAP */}

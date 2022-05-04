@@ -3,9 +3,11 @@ import loadingGif from "./assets/Rolling-1.1s-200px.gif";
 const IpInfo = props => {
   return (
     <div
-      className="bg-white rounded-2xl text-center
-     absolute w-[90%] left-1/2 top-[70%] -translate-x-2/4 shadow-xl
-     max-w-[1440px] mx-auto z-10 md:w-[80%]"
+      className={`bg-white rounded-2xl text-center
+     absolute w-[90%] left-1/2 ${
+       props.top ? "top-[80%]" : "top-[70%]"
+     } -translate-x-2/4 shadow-xl
+     max-w-[1440px] mx-auto z-10 md:w-[80%] transition-all duration-300`}
     >
       {/* same logic for checking errors in parent element(App.js) */}
       {/* if "location" exists in ipInfo (valid request), display ip details */}
