@@ -5,7 +5,7 @@ const IpInfo = props => {
     <div
       className={`bg-white rounded-2xl text-center
      absolute w-[90%] left-1/2 ${
-       props.top ? "top-[80%]" : "top-[70%]"
+       props.top ? "top-[83%]" : "top-[70%]"
      } -translate-x-2/4 shadow-xl
      max-w-[1440px] mx-auto z-10 md:w-[80%] transition-all duration-300`}
     >

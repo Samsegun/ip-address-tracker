@@ -78,7 +78,10 @@ function App() {
     <div className="App min-h-[828px]">
       {/* wrapper */}
       <div className="relative min-h-[100vh] font-rubik ">
-        <header className="relative min-h-[40vh] bg-background bg-no-repeat bg-center bg-cover">
+        <header
+          role="banner"
+          className="relative min-h-[40vh] bg-background bg-no-repeat bg-center bg-cover"
+        >
           <div className="text-center h-full max-w-[1440px] mx-auto">
             <h1 className="py-8 text-3xl text-white">
               <a href="/">IP Address Tracker</a>
@@ -90,7 +93,6 @@ function App() {
             >
               <input
                 type="text"
-                id=""
                 className={
                   ipInfo.code
                     ? "w-[90%] font-rubik bg-red-300 p-4 min-h-[40px] rounded-2xl text-white focus-visible:outline-none md:max-w-3xl md:text-lg md:w-[80%]"
