@@ -103,7 +103,7 @@ function App() {
                 src={arrow}
                 alt="arrow icon"
                 className="bg-black absolute top-0 right-[5%] h-full
-               p-4 cursor-pointer hover:opacity-70 rounded-r-2xl"
+               p-4 cursor-pointer hover:bg-[#413e3e] rounded-r-2xl"
                 onClick={submitHandler}
               />
             </form>
