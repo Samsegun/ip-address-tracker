@@ -31,8 +31,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://github.com/Samsegun/ip-address-tracker)
-- Live Site URL: [Add live site URL here](https://samsegun-ip-tracker.netlify.app)
+- Solution URL: [Samsegun-github](https://github.com/Samsegun/ip-address-tracker)
+- Live Site URL: [Ip-Address-Tracker](https://samsegun-ip-tracker.netlify.app)
 
 ## My process
 
@@ -51,10 +51,10 @@ Users should be able to:
 
 ## Author
 
-- Website - [Add your name here](https://github.com/Samsegun/)
+- Website - [Samsegun](https://github.com/Samsegun/)
 - Frontend Mentor - [samsegun](https://www.frontendmentor.io/profile/samsegun)
 - Twitter - [olusegun oye](https://www.twitter.com/datsleumas)
 
 ## Acknowledgments
 
-Big Shout-out to the Frontendmentor team. You guys rock!!!
+Big Shout-out to the [Frontendmentor team](https://www.frontendmentor.io). You guys rock!!!
