@@ -15,24 +15,27 @@ function App() {
   // get user input from with the help of useRef
   const ipDomain = useRef(null);
 
+  // fetch request using useEffect and fetch api
   useEffect(() => {
     fetch(ipify)
       .then(response => {
         return response.json();
       })
       .then(ipData => {
-        console.log(ipData);
+        // console.log(ipData);
         setIpinfo(ipData);
+        setFetchError("");
       })
       .catch(err => {
         // this is for handling network error NOT server or api error
-        console.log(err.message);
         setIpinfo({});
         setFetchError(err.message);
       });
   }, [ipify]);
 
+  // set map coordinates
   const MyMap = () => {
+    // to set new coordinates, flyTo can be used or setView (flyTo provides animation when resetting to new coordinates)
     const map = useMap();
     map.flyTo(ipInfo ? [ipInfo.location.lat, ipInfo.location.lng] : null, 12, {
       duration: 2,
@@ -66,7 +69,9 @@ function App() {
       <div className="relative min-h-[100vh] font-rubik ">
         <header className="relative min-h-[40vh] bg-background bg-no-repeat bg-center bg-cover">
           <div className="text-center h-full max-w-[1440px] mx-auto">
-            <h1 className="py-8 text-3xl text-white">IP Address Tracker</h1>
+            <h1 className="py-8 text-3xl text-white">
+              <a href="/">IP Address Tracker</a>
+            </h1>
 
             <form
               className="relative max-w-[828px] mx-auto"
@@ -75,8 +80,11 @@ function App() {
               <input
                 type="text"
                 id=""
-                className="w-[90%] font-rubik p-4 min-h-[40px] rounded-2xl text-base
-                focus-visible:outline-none md:max-w-3xl md:text-lg md:w-[80%] md:min-h-[]"
+                className={
+                  ipInfo.code
+                    ? "w-[90%] font-rubik bg-red-300 p-4 min-h-[40px] rounded-2xl text-white focus-visible:outline-none md:max-w-3xl md:text-lg md:w-[80%] md:min-h-[]"
+                    : "w-[90%] font-rubik p-4 min-h-[40px] rounded-2xl text-base focus-visible:outline-none md:max-w-3xl md:text-lg md:w-[80%] md:min-h-[]"
+                }
                 placeholder="Searh for any IP address or Domain"
                 ref={ipDomain}
               />
@@ -90,11 +98,11 @@ function App() {
             </form>
           </div>
 
-          {/* ip info */}
+          {/* IP INFORMATION */}
           <IpInfo ipInfo={ipInfo} fetchError={fetchError} />
         </header>
 
-        {/* map */}
+        {/* MAP */}
         {/* checking for valid requests before rendering data */}
         {/* if ipInfo contains "location",then request is valid else request is invalid */}
         {ipInfo.hasOwnProperty("location") && (
@@ -116,18 +124,21 @@ function App() {
           </MapContainer>
         )}
 
+        {/* if "code" exists in ipInfo (invalid request), display error messages */}
         {ipInfo.hasOwnProperty("code") && (
           <div className="px-4 py-10 text-2xl font-bold text-center font-rubik">
             {ipInfo.messages}
           </div>
         )}
 
+        {/* if "loading" exists in ipInfo (sending request), display spining image */}
         {ipInfo.hasOwnProperty("loading") && (
           <img src={loadingGif} alt="loading" className="mx-auto my-8" />
         )}
 
+        {/* if network error, display error details */}
         {fetchError && (
-          <div className="px-4 py-16 text-3xl font-bold text-center font-rubik">
+          <div className="px-4 py-16 text-3xl font-bold text-center text-red-400 font-rubik">
             {fetchError} Map
           </div>
         )}
@@ -136,5 +147,4 @@ function App() {
   );
 }
 
-// export MyMap;
 export default App;
