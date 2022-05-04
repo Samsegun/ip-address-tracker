@@ -27,7 +27,7 @@ Users should be able to:
 
 ### Screenshot
 
-![screenshot](./src/assets/ip-tracker-screenshot-edit.png.jpg)
+![screenshot](./src/assets/ip-tracker-screenshot-edit.png)
 
 ### Links
 
