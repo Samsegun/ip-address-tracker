@@ -149,7 +149,7 @@ function App() {
 
         {/* if network error, display error details */}
         {fetchError && (
-          <div className="px-4 py-16 text-3xl font-bold text-center text-red-400 font-rubik">
+          <div className="px-4 py-24 text-3xl font-bold text-center text-red-400 font-rubik">
             {fetchError} Map
           </div>
         )}
