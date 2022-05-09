@@ -4,9 +4,7 @@ const IpInfo = props => {
   return (
     <div
       className={`bg-white rounded-2xl text-center
-     absolute w-[90%] left-1/2 ${
-       props.top ? "top-[240px]" : "top-[200px]"
-     } -translate-x-2/4 shadow-xl
+     absolute w-[90%] left-1/2 top-[200px] -translate-x-2/4 shadow-xl
      max-w-[1440px] mx-auto z-10 md:w-[80%] transition-all duration-300`}
     >
       {/* same logic for checking errors in parent element(App.js) */}
