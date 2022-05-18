@@ -93,7 +93,7 @@ function App() {
                 className={
                   ipInfo.code
                     ? "w-[90%] font-rubik bg-red-300 p-4 min-h-[40px] rounded-2xl text-white focus-visible:outline-none md:max-w-3xl md:text-lg md:w-[80%]"
-                    : "w-[90%] font-rubik p-4 min-h-[40px] rounded-2xl text-base focus-visible:outline-none md:max-w-3xl md:text-lg md:w-[80%] md:min-h-[]"
+                    : "w-[90%] font-rubik p-4 min-h-[40px] rounded-2xl text-base focus-visible:outline-none md:max-w-3xl md:text-lg md:w-[80%]"
                 }
                 placeholder="Search for any IP address or Domain"
                 ref={ipDomain}

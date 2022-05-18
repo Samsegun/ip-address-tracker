@@ -7,7 +7,6 @@ const IpInfo = props => {
      absolute w-[90%] left-1/2 top-[200px] -translate-x-2/4 shadow-xl
      max-w-[1440px] mx-auto z-10 md:w-[80%] transition-all duration-300`}
     >
-      {/* same logic for checking errors in parent element(App.js) */}
       {/* if "location" exists in ipInfo (valid request), display ip details */}
       {"location" in props.ipInfo && (
         <ul className="flex flex-col items-center p-4 md:justify-around md:flex-row">
